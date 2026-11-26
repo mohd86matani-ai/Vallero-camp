@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vallero | استراحة ومخيم Slow Living</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1C1917;
+            --card-bg: #F5F5F4;
+            --accent: #D97706;
+            --olive: #4D7C0F;
+            --text-dark: #1C1917;
+            --text-light: #FAFAF9;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'IBM Plex Sans Arabic', sans-serif; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .motion-container {
+            width: 100%;
+            max-width: 420px;
+            background: #292524;
+            border-radius: 32px;
+            padding: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .brand-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+        .brand-name { font-size: 1.2rem; font-weight: 700; letter-spacing: 1px; color: #FBBF24; }
+        .progress-bar { display: flex; gap: 6px; margin-bottom: 20px; }
+        .progress-segment { height: 4px; flex: 1; background: rgba(255,255,255,0.2); border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; width: 0%; background: var(--accent); }
+        .scene { display: none; animation: cinematicEnter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .scene.active { display: block; }
+        @keyframes cinematicEnter {
+            0% { opacity: 0; transform: scale(0.92) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(217, 119, 6, 0.2);
+            color: #FBBF24;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        h1 { font-size: 1.9rem; line-height: 1.25; margin-bottom: 16px; font-weight: 700; }
+        .hero-img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            animation: slowZoom 8s ease-in-out infinite alternate;
+        }
+        @keyframes slowZoom { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
+        .ui-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+        .ui-card {
+            background: var(--card-bg);
+            color: var(--text-dark);
+            padding: 16px;
+            border-radius: 18px;
+            transform: translateY(15px);
+            opacity: 0;
+            animation: cardPop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .ui-card:nth-child(2) { animation-delay: 0.15s; }
+        .ui-card:nth-child(3) { animation-delay: 0.3s; }
+        .ui-card:nth-child(4) { animation-delay: 0.45s; }
+        @keyframes cardPop { to { transform: translateY(0); opacity: 1; } }
+        .ui-card h3 { font-size: 1.05rem; margin-bottom: 4px; color: var(--accent); }
+        .ui-card p { font-size: 0.85rem; color: #57534E; font-weight: 600; }
+        .stat-box { background: var(--olive); padding: 20px; border-radius: 20px; text-align: center; margin-bottom: 16px; }
+        .stat-number { font-size: 2.4rem; font-weight: 700; display: block; }
+        .cta-btn {
+            display: block;
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            padding: 16px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3);
+        }
+        .controls { display: flex; justify-content: space-between; margin-top: 16px; font-size: 0.85rem; color: #A8A29E; }
+        .controls button { background: none; border: none; color: white; cursor: pointer; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+<div class="motion-container">
+    <div class="brand-header">
+        <span class="brand-name">VALLERO</span>
+        <span style="font-size: 0.8rem; color: #A8A29E;">Slow Living Retreat</span>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-segment"><div class="progress-fill" id="prog-0"></div></div>
+        <div class="progress-segment"><div class="progress-fill" id="prog-1"></div></div>
+        <div class="progress-segment"><div class="progress-fill" id="prog-2"></div></div>
+    </div>
+
+    <div class="scene active" id="scene-0">
+        <span class="badge">✨ تجربة Slow Living</span>
+        <h1>عطلتك الجاية.. في حضن جبل قهوان</h1>
+        <img src="https://unsplash.com" alt="Vallero Camp" class="hero-img">
+        <p style="color: #D6D3D1; font-size: 0.95rem; line-height: 1.6;">
+            مساحة مفتوحة، هدوء تام بعيد عن إزعاج المدينة، وامتداد بصري يأخذك لعالم ثاني.
+        </p>
+    </div>
+
+    <div class="scene" id="scene-1">
+        <span class="badge">🏕️ مرافق متكاملة للعائلة</span>
+        <h1>كل ما تحتاجه لراحتك في مكان واحد</h1>
+        <div class="ui-grid">
+            <div class="ui-card">
+                <h3>خيمة & جلسة</h3>
+                <p>جلسة كبيرة مطلة مباشرة على الخيمة والجبل</p>
+            </div>
+            <div class="ui-card">
+                <h3>مطبخ مفتوح</h3>
+                <p>مجهز بالكامل مع جلسة عائلية دافئة</p>
+            </div>
+            <div class="ui-card">
+                <h3>غرفة نوم</h3>
+                <p>تصميم مريح يضمن لك نوم هادئ</p>
+            </div>
+            <div class="ui-card">
+                <h3>2 دورات مياه</h3>
+                <p>نظافة تامة وخصوصية للعائلة</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="scene" id="scene-2">
+        <span class="badge">🌿 خصوصية تامة</span>
+        <h1>افصل عن ضجيج الحياة واستمتع باللحظة</h1>
+        <div class="stat-box">
+            <span class="stat-number">100%</span>
+            <span>هدوء، استجمام، وإطلالة مفتوحة بلا حواجز</span>
+        </div>
+        <a href="https://wa.meً، أرغب بالاستفسار عن حجز استراحة Vallero" class="cta-btn" target="_blank">
+            احجز يومك الآن عبر واتساب ←
+        </a>
+    </div>
+
+    <div class="controls">
+        <button onclick="prevScene()">→ السابق</button>
+        <span id="scene-counter">1 / 3</span>
+        <button onclick="nextScene()">التالي ←</button>
+    </div>
+</div>
+
+<script>
+    let currentScene = 0;
+    const totalScenes = 3;
+    const duration = 5000;
+    let timer;
+
+    function showScene(index) {
+        document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+        document.getElementById(`scene-${index}`).classList.add('active');
+        document.getElementById('scene-counter').innerText = `${index + 1} / ${totalScenes}`;
+
+        for (let i = 0; i < totalScenes; i++) {
+            const fill = document.getElementById(`prog-${i}`);
+            fill.style.transition = 'none';
+            fill.style.width = i < index ? '100%' : '0%';
+        }
+
+        setTimeout(() => {
+            const activeFill = document.getElementById(`prog-${index}`);
+            activeFill.style.transition = `width ${duration}ms linear`;
+            activeFill.style.width = '100%';
+        }, 50);
+    }
+
+    function nextScene() {
+        currentScene = (currentScene + 1) % totalScenes;
+        showScene(currentScene);
+        resetTimer();
+    }
+
+    function prevScene() {
+        currentScene = (currentScene - 1 + totalScenes) % totalScenes;
+        showScene(currentScene);
+        resetTimer();
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        timer = setInterval(nextScene, duration);
+    }
+
+    showScene(0);
+    resetTimer();
+</script>
+
+</body>
+</html>
